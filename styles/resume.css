@@ -1,0 +1,15 @@
+
+.table {
+    border-width: 1px;
+    border-color: #383838;
+    border-radius: 8px;
+    border-style: solid;
+}
+
+td {
+    padding: 2px 8px;
+}
+
+th {
+    padding-bottom: 8px;
+}
