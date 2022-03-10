@@ -23,15 +23,3 @@ character encoding
 
 || Image Tag 
 - When we include an external URL, the browser has to ping the server that hosts the image to try to obtain the image 
-
-
-
-|| HTML Tags 
-- <em></em> for italization instead of <i></i>
-- <strong></strong> for bolding 
-
-|| Form Element 
-- 
-
-
-
