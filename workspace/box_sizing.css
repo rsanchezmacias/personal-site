@@ -1,0 +1,133 @@
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+}
+
+.top {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    
+    padding: 20px;
+    border-style: solid;
+    border-width: 10px;
+    margin-left: 0px;
+}
+
+.middle {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+
+    border-style: solid;
+    border-width: 20px;
+    margin-left: 200px;
+}
+
+.bottom {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+
+    border-style: solid;
+    border-width: 10px;
+    margin-left: 400px;
+}
+
+
+.pink {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+
+    margin: 0px;
+}
+
+.purple {
+    width: 200px;
+    height: 200px;
+    background-color: purple;
+
+    margin: 0px;
+    position: relative;
+    bottom: 200px;
+    left: 200px;
+}
+
+.aqua {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+
+    margin: 0px;
+    position: relative;
+    bottom: 400px;
+    left: 400px;
+}
+
+.yellow {
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+
+    margin: 0px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+
+.gray {
+    width: 400px;
+    height: 400px;
+    background-color: grey;
+
+    position: relative;
+}
+
+.white {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+
+    position: absolute;
+    right: 20px;
+
+    border-style: solid;
+    border-color: black;
+}
+
+.brown {
+    width: 200px;
+    height: 200px;
+    background-color: brown;
+
+    position: absolute;
+    right: 20px;
+    bottom: -50px;
+}
+
+.orange {
+    width: 200px;
+    height: 200px;
+    background-color: orange;    
+}
+
+.black {
+    width: 200px;
+    height: 200px;
+    background-color: black;    
+
+    position: fixed;
+    right: 0px;
+    /* top: 0px; */
+    /* bottom: 0px; */
+}
