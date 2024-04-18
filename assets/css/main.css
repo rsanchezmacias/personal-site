@@ -1164,6 +1164,8 @@ button {
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-color: rgba(202, 201, 201, 0.5);
+	background-blend-mode: multiply;
 	z-index: 1;
 }
 
@@ -1327,6 +1329,7 @@ body.is-preload #bg:before {
 	transition-delay: 0.25s;
 	padding: 3rem 2rem;
 	max-height: 40rem;
+	text-shadow: 2px 2px 3px rgb(54, 54, 54), 0 0 1px rgb(54, 54, 54), 0 0 0.2px rgb(54, 54, 54);
 	overflow: hidden;
 }
 
@@ -1339,6 +1342,7 @@ body.is-preload #bg:before {
 	letter-spacing: 0.2rem;
 	font-size: 0.8rem;
 	line-height: 2;
+	font-weight: 700;
 }
 
 #header nav ul {
@@ -1550,10 +1554,10 @@ body.is-preload #header .content .inner {
 	transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out;
 	padding: 4.5rem 2.5rem 1.5rem 2.5rem;
 	position: relative;
-	width: 40rem;
+	width: 55rem;
 	max-width: 100%;
 	background-color: rgba(27, 31, 34, 0.85);
-	border-radius: 4px;
+	border-radius: 24px;
 	opacity: 0;
 }
 
