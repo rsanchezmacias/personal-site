@@ -90,6 +90,7 @@ button {
   /* Layout */
   --border-width: 1px;
   --border-radius: 4px;
+  --border-radius-rounded: 16px;
   --element-height: 2.75rem;
   --max-content-width: 40rem;
 

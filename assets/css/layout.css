@@ -123,7 +123,7 @@ body.is-preload #bg::before {
 
 #header > *::before {
   content: '';
-  display: block;
+  display: none;
   position: absolute;
   top: calc(-3.5rem - 1px);
   left: calc(50% - var(--border-width));
@@ -141,15 +141,20 @@ body.is-preload #bg::before {
 }
 
 #header .logo {
-  width: 5.5rem;
-  height: 5.5rem;
-  line-height: 5.5rem;
+  width: 16rem;
+  height: 16rem;
+  line-height: 16rem;
   border: solid var(--border-width) var(--color-border);
   border-radius: 100%;
-  background-image: url('../../resources/images/headshot.jpeg');
+  background-image: url('../../resources/images/headshot.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   z-index: 1;
 }
 
@@ -163,6 +168,10 @@ body.is-preload #bg::before {
   border-top-width: var(--border-width);
   border-bottom-width: var(--border-width);
   max-width: 100%;
+  background-color: rgba(27, 31, 34, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--border-radius-rounded);
 }
 
 #header .content .inner {
@@ -179,11 +188,17 @@ body.is-preload #bg::before {
   margin-bottom: 0;
 }
 
+#header .content .inner h1,
+#header .content .inner h3 {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
 #header .content p {
   text-transform: uppercase;
   letter-spacing: var(--font-letter-spacing);
   font-size: 0.8rem;
   line-height: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #header nav ul {
@@ -192,7 +207,10 @@ body.is-preload #bg::before {
   list-style: none;
   padding-left: 0;
   border: solid var(--border-width) var(--color-border);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-rounded);
+  background-color: rgba(27, 31, 34, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #header nav ul li {
@@ -214,6 +232,7 @@ body.is-preload #bg::before {
   letter-spacing: var(--font-letter-spacing);
   font-size: 0.8rem;
   border-bottom: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 #header nav ul li a:hover {
@@ -282,9 +301,9 @@ body.is-preload #header .content .inner {
   }
 
   #header .logo {
-    width: 4.75rem;
-    height: 4.75rem;
-    line-height: 4.75rem;
+    width: 10rem;
+    height: 10rem;
+    line-height: 10rem;
   }
 
   #header .logo .icon::before {
@@ -292,7 +311,7 @@ body.is-preload #header .content .inner {
   }
 
   #header .content .inner {
-    padding: 2.5rem var(--spacing-sm);
+    padding: 2.5rem 2rem;
   }
 
   #header .content p {
@@ -305,8 +324,14 @@ body.is-preload #header .content .inner {
     padding: 1.5rem 0;
   }
 
+  #header .logo {
+    width: 9rem;
+    height: 9rem;
+    line-height: 9rem;
+  }
+
   #header .content .inner {
-    padding: 2.5rem 0;
+    padding: 2.5rem 1.5rem;
   }
 
   #header nav ul {
@@ -359,7 +384,7 @@ body.is-preload #header .content .inner {
   position: relative;
   width: var(--max-content-width);
   max-width: 100%;
-  background-color: rgba(27, 31, 34, 0.85);
+  background-color: rgba(27, 31, 34, 0.65);
   border-radius: var(--border-radius);
   opacity: 0;
   padding: 2.5rem 2.5rem 2rem 2.5rem;
@@ -441,12 +466,31 @@ body.is-preload #header .content .inner {
   text-align: center;
 }
 
+#footer ul.icons {
+  margin-bottom: 1.5rem;
+}
+
+#footer ul.icons li {
+  padding-left: 0;
+  padding-right: 1.25em;
+}
+
+#footer ul.icons li:last-child {
+  padding-right: 0;
+}
+
 #footer .copyright {
   letter-spacing: var(--font-letter-spacing);
   font-size: 0.6rem;
-  opacity: 0.75;
+  opacity: 0.9;
   margin-bottom: 0;
   text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background-color: rgba(27, 31, 34, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  display: inline-block;
 }
 
 body.is-article-visible #footer {
