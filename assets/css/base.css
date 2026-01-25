@@ -1,0 +1,315 @@
+/**
+ * Base Styles
+ * Reset, CSS Custom Properties (Design Tokens), and Typography
+ */
+
+/* ============================================
+   CSS Reset
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+
+:root {
+  /* Colors */
+  --color-bg-primary: #1b1f22;
+  --color-bg-secondary: #000000;
+  --color-bg-overlay: rgba(19, 21, 25, 0.5);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.5);
+  --color-border: #ffffff;
+  --color-border-bg: rgba(255, 255, 255, 0.075);
+  --color-border-bg-alt: rgba(255, 255, 255, 0.175);
+
+  /* Typography */
+  --font-family-primary: 'Source Sans Pro', sans-serif;
+  --font-family-mono: 'Courier New', monospace;
+  --font-weight-normal: 300;
+  --font-weight-bold: 600;
+  --font-letter-spacing: 0.2rem;
+  --font-letter-spacing-heading: 0.5rem;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 3.5rem;
+
+  /* Layout */
+  --border-width: 1px;
+  --border-radius: 4px;
+  --element-height: 2.75rem;
+  --max-content-width: 40rem;
+
+  /* Transitions & Animations */
+  --transition-fast: 0.2s;
+  --transition-normal: 0.325s;
+  --transition-slow: 0.75s;
+  --transition-bg: 2.5s;
+  --transition-intro: 0.75s;
+
+  /* Z-index layers */
+  --z-index-base: 10000;
+  --z-index-bg: 1;
+  --z-index-wrapper: 2;
+  --z-index-main: 3;
+  --z-index-modal: 4;
+
+  /* Breakpoints (for reference, use in media queries) */
+  --breakpoint-xxsmall: 360px;
+  --breakpoint-xsmall: 480px;
+  --breakpoint-small: 736px;
+  --breakpoint-medium: 980px;
+  --breakpoint-large: 1280px;
+  --breakpoint-xlarge: 1680px;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+html {
+  font-size: 16pt;
+}
+
+@media (max-width: 1680px) {
+  html {
+    font-size: 12pt;
+  }
+}
+
+@media (max-width: 736px) {
+  html {
+    font-size: 11pt;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 10pt;
+  }
+}
+
+body,
+input,
+select,
+textarea {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+a {
+  transition: color var(--transition-fast) ease-in-out,
+              background-color var(--transition-fast) ease-in-out,
+              border-bottom-color var(--transition-fast) ease-in-out;
+  border-bottom: dotted 1px var(--color-text-secondary);
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  border-bottom-color: transparent;
+}
+
+strong,
+b {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+p {
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.5;
+  margin: 0 0 calc(var(--spacing-md) * 0.5) 0;
+  text-transform: uppercase;
+  letter-spacing: var(--font-letter-spacing);
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.3;
+  letter-spacing: var(--font-letter-spacing-heading);
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  letter-spacing: var(--font-letter-spacing-heading);
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+h4 {
+  font-size: 0.8rem;
+}
+
+h5 {
+  font-size: 0.7rem;
+}
+
+h6 {
+  font-size: 0.6rem;
+}
+
+@media (max-width: 736px) {
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 1.25em;
+    line-height: 1.5;
+  }
+}
+
+h2.major,
+h3.major {
+  border-bottom: solid var(--border-width) var(--color-border);
+  width: max-content;
+  padding-bottom: 0.5rem;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+sub {
+  font-size: 0.8rem;
+  position: relative;
+  top: 0.5rem;
+}
+
+sup {
+  font-size: 0.8rem;
+  position: relative;
+  top: -0.5rem;
+}
+
+blockquote {
+  border-left: solid calc(var(--border-width) * 4) var(--color-border);
+  font-style: italic;
+  margin: 0 0 var(--spacing-md) 0;
+  padding: calc(var(--spacing-md) / 4) 0 calc(var(--spacing-md) / 4) var(--spacing-md);
+}
+
+code {
+  background: var(--color-border-bg);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family-mono);
+  font-size: 0.9rem;
+  margin: 0 0.25rem;
+  padding: 0.25rem 0.65rem;
+}
+
+pre {
+  -webkit-overflow-scrolling: touch;
+  font-family: var(--font-family-mono);
+  font-size: 0.9rem;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+pre code {
+  display: block;
+  line-height: 1.75;
+  padding: var(--spacing-sm) 1.5rem;
+  overflow-x: auto;
+}
+
+hr {
+  border: 0;
+  border-bottom: solid var(--border-width) var(--color-border);
+  margin: calc(var(--spacing-md) * 1.375) 0;
+}
+
+/* Utility classes */
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
