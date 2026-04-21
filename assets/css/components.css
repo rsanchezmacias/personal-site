@@ -363,3 +363,48 @@ table.alt thead {
 table.alt tfoot {
   border-top: 0;
 }
+
+/* ============================================
+   Bubbles
+   ============================================ */
+
+#bubbles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-index-bg);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, var(--bubble-border-opacity, 0.12));
+  background: rgba(255, 255, 255, var(--bubble-fill-opacity, 0.03));
+  width: var(--bubble-size, 20px);
+  height: var(--bubble-size, 20px);
+  top: var(--bubble-start-y);
+  left: var(--bubble-start-x);
+  animation: bubbleFloat var(--bubble-duration, 30s) var(--bubble-delay, 0s) linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--bubble-dx), var(--bubble-dy));
+    opacity: 0;
+  }
+}
