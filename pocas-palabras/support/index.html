@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="Pocas Palabras — Support" />
+	<title>Pocas Palabras · Support</title>
+
+	<link rel="stylesheet" href="../../assets/css/base.css" />
+	<link rel="stylesheet" href="../../assets/css/components.css" />
+	<link rel="stylesheet" href="../../assets/css/fontawesome-all.min.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
+	<link rel="icon" href="../../resources/images/pocas-palabras/icon-circular.png" type="image/png">
+
+	<style>
+		body {
+			background-color: var(--color-bg-primary);
+			min-height: 100vh;
+		}
+
+		.page-wrapper {
+			max-width: var(--max-content-width);
+			margin: 0 auto;
+			padding: var(--spacing-xl) var(--spacing-md);
+			position: relative;
+			z-index: var(--z-index-wrapper);
+		}
+
+		.back-link {
+			display: inline-block;
+			margin-bottom: var(--spacing-lg);
+			color: var(--color-text-secondary);
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: var(--font-letter-spacing);
+			border-bottom: none;
+		}
+
+		.back-link:hover {
+			color: var(--color-text-primary);
+		}
+
+		.contact-block {
+			margin-top: var(--spacing-lg);
+			padding: var(--spacing-md);
+			border: solid 1px var(--color-border-bg-alt);
+			border-radius: var(--border-radius);
+			text-align: center;
+		}
+
+		.contact-block p {
+			color: var(--color-text-secondary);
+			margin-bottom: var(--spacing-md);
+		}
+
+		.page-footer {
+			text-align: center;
+			color: var(--color-text-secondary);
+			font-size: 0.8rem;
+			border-top: solid 1px var(--color-border-bg);
+			padding-top: var(--spacing-md);
+			margin-top: var(--spacing-lg);
+		}
+	</style>
+</head>
+<body>
+	<div class="page-wrapper">
+
+		<a href="../" class="back-link icon solid fa-arrow-left"> Pocas Palabras</a>
+
+		<h2 class="major">Support</h2>
+
+		<p>Thank you for using Pocas Palabras! If you have any questions, feedback, or issues, I'd love to hear from you.</p>
+
+		<p>Common things you can reach out about:</p>
+		<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: var(--spacing-md); line-height: 2;">
+			<li>Bug reports or unexpected behavior</li>
+			<li>Feature requests or suggestions</li>
+			<li>Questions about how the app works</li>
+		</ul>
+
+		<div class="contact-block">
+			<p>Send an email and I'll get back to you as soon as I can.</p>
+			<a href="mailto:r.sanchez.macias.dev@gmail.com?subject=Pocas Palabras Support" class="button icon solid fa-envelope"> Email Support</a>
+		</div>
+
+		<footer class="page-footer">
+			<p>&copy; Ricardo Sanchez-Macias &middot; <a href="/">rsanchezmacias.com</a></p>
+		</footer>
+
+	</div>
+
+	<div id="bubbles"></div>
+	<script src="../../assets/js/bubbles.js"></script>
+</body>
+</html>
