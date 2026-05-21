@@ -1,12 +1,17 @@
 /**
  * Bubbles
- * Generates subtle floating bubbles that drift from top-right toward bottom-left.
+ * Subtle floating bubbles, anchored to the document so they scroll away with the
+ * page. Each one enters from just off the top edge or right edge of the *current*
+ * viewport, drifts diagonally toward the bottom-left, fades out, then re-enters off
+ * an edge again. Bubbles never appear inside the visible area — they only ever slide
+ * in from the edges (so after load the screen fills in from the edges over ~20s).
  */
 
 (function () {
   'use strict';
 
-  var BUBBLE_COUNT = 18;
+  var BUBBLE_COUNT = 24;   // how many bubbles are kept in flight around the viewport
+  var RIGHT_EDGE_SHARE = 0.4; // fraction that enter from the right edge vs the top edge
   var MIN_SIZE = 8;
   var MAX_SIZE = 48;
   var MIN_DURATION = 22;
@@ -16,28 +21,40 @@
     return Math.random() * (max - min) + min;
   }
 
+  // Full scrollable height — the layer spans this so document-anchored bubbles
+  // deep in the page aren't clipped by the layer's overflow:hidden.
+  function docHeight() {
+    var d = document.documentElement;
+    var b = document.body;
+    return Math.max(
+      d.scrollHeight, d.offsetHeight,
+      b ? b.scrollHeight : 0, b ? b.offsetHeight : 0,
+      window.innerHeight
+    );
+  }
+
   function randomize(bubble) {
     var size = rand(MIN_SIZE, MAX_SIZE);
     var vw = window.innerWidth;
     var vh = window.innerHeight;
-
-    // Spawn off-screen: either above the top edge (right half) or off the right edge (top half)
+    var scrollY = window.scrollY || window.pageYOffset || 0;
     var scale = size / MAX_SIZE;
-    var spawnOnRight = Math.random() < 0.4;
+
+    // Enter from just OFF the top or right edge of the CURRENT viewport, in document
+    // coordinates (so the bubble then scrolls with the page). Never inside the view.
     var startX, startY;
-    if (spawnOnRight) {
-      startX = vw + rand(0, size);
-      startY = rand(-size, vh * 0.40);
+    if (Math.random() < RIGHT_EDGE_SHARE) {
+      startX = vw + rand(0, size);              // off the right edge
+      startY = scrollY + rand(-size, vh);       // somewhere down the visible band
     } else {
-      startX = rand(vw * 0.40, vw + size);
-      startY = -rand(size, size + 20);
+      startX = rand(-size, vw);                 // anywhere across the width
+      startY = scrollY - rand(size, size + 20); // just above the visible top
     }
 
-    // Travel left and down; bigger bubbles travel farther
+    // Diagonal drift toward the bottom-left; bigger bubbles travel farther.
     var dx = -rand(vw * (0.55 + scale * 0.25), vw * (0.85 + scale * 0.25));
     var dy = rand(vh * (0.45 + scale * 0.15), vh * (0.75 + scale * 0.15));
 
-    // Opacity — slightly more visible than before
     var borderOpacity = rand(0.18, 0.30) * (0.6 + scale * 0.4);
     var fillOpacity = rand(0.04, 0.09) * (0.6 + scale * 0.4);
 
@@ -51,17 +68,17 @@
     bubble.style.setProperty('--bubble-fill-opacity', fillOpacity.toFixed(3));
   }
 
-  function createBubble(container, delayOverride) {
+  function createBubble(container) {
     var bubble = document.createElement('div');
     bubble.className = 'bubble';
     randomize(bubble);
 
-    if (delayOverride !== undefined) {
-      bubble.style.setProperty('--bubble-delay', delayOverride + 's');
-    } else {
-      bubble.style.setProperty('--bubble-delay', '0s');
-    }
+    // Positive stagger + the CSS 'backwards' fill keep each bubble invisible and
+    // off-screen during its delay, so it only ever slides in from an edge — never
+    // appearing mid-screen, even at load.
+    bubble.style.setProperty('--bubble-delay', rand(0, MIN_DURATION).toFixed(2) + 's');
 
+    // Every subsequent loop re-enters cleanly from an edge of the current viewport.
     bubble.addEventListener('animationiteration', function () {
       randomize(bubble);
       bubble.style.setProperty('--bubble-delay', '0s');
@@ -74,11 +91,12 @@
     var container = document.getElementById('bubbles');
     if (!container) return;
 
-    // Stagger with positive delays so every bubble starts off-screen and enters naturally
-    for (var i = 0; i < BUBBLE_COUNT; i++) {
-      var staggerDelay = rand(0, MIN_DURATION);
-      createBubble(container, staggerDelay);
-    }
+    var sizeLayer = function () { container.style.height = docHeight() + 'px'; };
+    sizeLayer();
+    window.addEventListener('load', sizeLayer);     // height may grow once fonts/images load
+    window.addEventListener('resize', sizeLayer);
+
+    for (var i = 0; i < BUBBLE_COUNT; i++) createBubble(container);
   }
 
   if (document.readyState === 'loading') {

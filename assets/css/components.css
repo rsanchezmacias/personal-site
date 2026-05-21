@@ -369,11 +369,11 @@ table.alt tfoot {
    ============================================ */
 
 #bubbles {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100%; /* JS overrides with full document height; this is a fallback */
   z-index: var(--z-index-bg);
   pointer-events: none;
   overflow: hidden;
@@ -388,7 +388,7 @@ table.alt tfoot {
   height: var(--bubble-size, 20px);
   top: var(--bubble-start-y);
   left: var(--bubble-start-x);
-  animation: bubbleFloat var(--bubble-duration, 30s) var(--bubble-delay, 0s) linear infinite;
+  animation: bubbleFloat var(--bubble-duration, 30s) var(--bubble-delay, 0s) linear infinite backwards;
   will-change: transform, opacity;
 }
 
