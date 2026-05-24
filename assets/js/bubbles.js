@@ -207,15 +207,6 @@
     window.addEventListener('resize', sizeLayer);
     if (window.visualViewport) window.visualViewport.addEventListener('resize', sizeLayer);
 
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        clearBubbles(container);
-      } else {
-        sizeLayer();
-        startBubbles(container);
-      }
-    });
-
     window.addEventListener('pageshow', function (event) {
       if (!event.persisted) return;
 
