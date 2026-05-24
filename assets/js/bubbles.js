@@ -11,8 +11,11 @@
 (function () {
   'use strict';
 
-  var BUBBLE_COUNT = 24;   // how many bubbles are kept in flight around the viewport
+  var MIN_BUBBLE_COUNT = 20;
+  var MAX_BUBBLE_COUNT = 64;
+  var BUBBLES_PER_VIEWPORT = 16;
   var RIGHT_EDGE_SHARE = 0.4; // fraction that enter from the right edge vs the top edge
+  var RIGHT_EDGE_VERTICAL_SPAN = 2.4; // also seeds bubbles below the viewport for scrolling
   var MIN_SIZE = 8;
   var MAX_SIZE = 48;
   var MIN_DURATION = 22000;
@@ -60,6 +63,14 @@
     };
   }
 
+  function bubbleCount() {
+    var viewport = viewportBounds();
+    var viewportHeight = Math.max(viewport.height, 1);
+    var count = Math.ceil((docHeight() / viewportHeight) * BUBBLES_PER_VIEWPORT);
+
+    return Math.max(MIN_BUBBLE_COUNT, Math.min(MAX_BUBBLE_COUNT, count));
+  }
+
   function randomize(bubble) {
     var size = rand(MIN_SIZE, MAX_SIZE);
     var viewport = viewportBounds();
@@ -69,8 +80,14 @@
     // coordinates (so the bubble then scrolls with the page). Never inside the view.
     var startX, startY;
     if (Math.random() < RIGHT_EDGE_SHARE) {
+      var spawnTop = viewport.top - size;
+      var spawnBottom = Math.min(
+        docHeight() - size,
+        viewport.top + viewport.height * RIGHT_EDGE_VERTICAL_SPAN
+      );
+
       startX = viewport.left + viewport.width + rand(0, size); // off the right edge
-      startY = viewport.top + rand(-size, viewport.height);    // somewhere down the visible band
+      startY = rand(spawnTop, Math.max(spawnTop, spawnBottom));
     } else {
       startX = viewport.left + rand(-size, viewport.width);    // anywhere across the width
       startY = viewport.top - rand(size, size + 20);           // just above the visible top
@@ -170,7 +187,7 @@
   function startBubbles(container) {
     clearBubbles(container);
 
-    for (var i = 0; i < BUBBLE_COUNT; i++) {
+    for (var i = 0, count = bubbleCount(); i < count; i++) {
       // Positive stagger keeps the initial viewport empty of mid-screen spawns; each
       // bubble becomes visible only after it starts sliding in from an edge.
       scheduleBubble(container, rand(0, INITIAL_STAGGER));
@@ -183,7 +200,10 @@
 
     var sizeLayer = function () { container.style.height = docHeight() + 'px'; };
     sizeLayer();
-    window.addEventListener('load', sizeLayer);     // height may grow once fonts/images load
+    window.addEventListener('load', function () {
+      sizeLayer();     // height may grow once fonts/images load
+      startBubbles(container);
+    });
     window.addEventListener('resize', sizeLayer);
     if (window.visualViewport) window.visualViewport.addEventListener('resize', sizeLayer);
 
